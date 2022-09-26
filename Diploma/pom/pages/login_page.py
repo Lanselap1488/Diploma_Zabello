@@ -1,8 +1,5 @@
 from ..pages.base_page import BasePage
 from ..locators import login_locators
-# from ..locators.login_locators import TEXT_ENTER_PHONE, FIELD_TO_ENTER_PHONE, ENTER_BUTTON, \
-#     TEXT_ENTER_CODE, ERROR_INCORRECT_NUM, ERROR_INCORRECT_CHARS, ENTER_BY_POST, EMAIL_FIELD, \
-#     TEXT_ENTER_MAIL, ERROR_USER_NOT_FOUND
 
 
 class LoginPage(BasePage):

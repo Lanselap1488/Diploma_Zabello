@@ -14,4 +14,4 @@ class BasePage:
         return WebDriverWait(self.driver, time).until(EC.presence_of_all_elements_located(locator))
 
     def move_to_element(self, locator):
-        return ActionChains(self.driver).move_to_element(locator).perform()
+        ActionChains(self.driver).move_to_element(locator).perform()

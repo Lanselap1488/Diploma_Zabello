@@ -1,10 +1,12 @@
 from ..pages.home_page import HomePage
 from ..pages.login_page import LoginPage
 import pytest
+import allure
 from ..utils.data import PHONES, INVALID_NUM, INVALID_CHARS
-from time import sleep
 
 
+@allure.suite('Login tests')
+@allure.feature('Open login form')
 def test_press_button_login(driver):
     home_page = HomePage(driver)
     home_page.open_home_page()
@@ -14,6 +16,8 @@ def test_press_button_login(driver):
     assert text_login.is_displayed() and "Введите номер телефона" in text_login.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Enter valid phone to get code')
 @pytest.mark.parametrize('num', PHONES)
 def test_enter_valid_phone(driver, num):
     home_page = HomePage(driver)
@@ -26,6 +30,8 @@ def test_enter_valid_phone(driver, num):
     assert code.is_displayed() and "Введите код" in code.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Enter invalid phone numbers')
 @pytest.mark.parametrize('num', INVALID_NUM)
 def test_enter_invalid_phone_numbers(driver, num):
     home_page = HomePage(driver)
@@ -38,6 +44,8 @@ def test_enter_invalid_phone_numbers(driver, num):
     assert error.is_displayed and 'Некорректный формат телефона' in error.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Enter invalid phone chars')
 @pytest.mark.parametrize('num', INVALID_CHARS)
 def test_enter_invalid_phone_empty(driver, num):
     home_page = HomePage(driver)
@@ -50,6 +58,8 @@ def test_enter_invalid_phone_empty(driver, num):
     assert error.is_displayed and 'Заполните телефон' in error.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Open form to enter email')
 def test_enter_via_email_is_open(driver):
     home = HomePage(driver)
     home.open_home_page()
@@ -60,6 +70,8 @@ def test_enter_via_email_is_open(driver):
     assert mail.is_displayed() and "Войдите по почте" in mail.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Open page about ozon id')
 def test_switch_to_ozon_id_page(driver):
     home = HomePage(driver)
     home.open_home_page()
@@ -70,6 +82,8 @@ def test_switch_to_ozon_id_page(driver):
     assert ozon_id.is_displayed() and 'Что такое Ozon ID' in ozon_id.text
 
 
+@allure.suite('Login tests')
+@allure.feature('Open page about support of customers')
 def test_switch_to_customer_support_page(driver):
     home = HomePage(driver)
     home.open_home_page()
@@ -79,34 +93,3 @@ def test_switch_to_customer_support_page(driver):
     login_page.close_pop_up()
     support = login_page.check_text_customer_support()
     assert support.is_displayed() and 'Главная' in support.text
-
-
-
-# @pytest.mark.parametrize('mail', MAIL_UNREGISTERED)
-# def test_login_via_mail_registered(driver, mail):
-#     home = HomePage(driver)
-#     home.open_home_page()
-#     home.press_button_to_login()
-#     login_page = LoginPage(driver)
-#     login_page.enter_via_email()
-#     login_page.enter_email_into_field(mail)
-#     login_page.press_enter()
-#     error = login_page.error_unregistered_mail()
-#     assert error.is_displayed()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
